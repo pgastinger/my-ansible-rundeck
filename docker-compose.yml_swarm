@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+#  db:
+#    image: mariadb:latest #mysql does not work on ARM
+#    environment:
+#      MARIADB_ROOT_PASSWORD: mpHj4FgHE6duPGcC
+#      MARIADB_DATABASE: rundeck
+#    volumes:
+#      - /srv/rundeck_db:/var/lib/mysql
+#    deploy:
+#      placement:
+#        constraints:
+#          - "node.labels.rundeck==true"
+#    networks:
+#      - traefik-public
+
+  rundeck:
+    image: my-ansible-rundeck:latest
+#    depends_on:
+#      - db
+    volumes:
+      - ./config:/home/myuser/rundeck/server/config
+      - /srv/rundeck:/home/myuser/rundeck/server/data/
+      - /srv/ansible:/home/myuser/rundeck/ansible/
+    deploy:
+      placement:
+        constraints:
+          - "node.labels.rundeck==true"
+      labels:
+        - traefik.enable=true
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.rundeck.rule=Host(`rundeck.ddns.net`)
+        - traefik.http.routers.rundeck.entrypoints=https
+        - traefik.http.routers.rundeck.tls=true
+        - traefik.http.routers.rundeck.tls.certresolver=le
+        - traefik.http.services.rundeck.loadbalancer.server.port=4440
+        - traefik.http.services.rundeck.loadbalancer.server.scheme=http
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
