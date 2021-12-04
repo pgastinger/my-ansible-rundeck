@@ -43,72 +43,69 @@ rundeck.war                                                  100%[==============
 ```
 peter@Peter-Desktop-2020:/tmp/my-ansible-rundeck$ docker build -t my-ansible-rundeck:latest .
 Sending build context to Docker daemon  196.1MB
-Step 1/22 : FROM openjdk:11.0.13-bullseye
+Step 1/21 : FROM openjdk:11.0.13-bullseye
  ---> 8c0978077f16
-Step 2/22 : ARG RDECK_IMAGE=rundeck.war
+Step 2/21 : ARG RDECK_IMAGE=rundeck.war
  ---> Using cache
- ---> c62b274d959a
-Step 3/22 : ENV PYTHONDONTWRITEBYTECODE 1
+ ---> c062658ac6bc
+Step 3/21 : ENV PYTHONDONTWRITEBYTECODE 1
  ---> Using cache
- ---> 00c852c41f4a
-Step 4/22 : ENV PYTHONUNBUFFERED 1
+ ---> 6f50d9043eee
+Step 4/21 : ENV PYTHONUNBUFFERED 1
  ---> Using cache
- ---> 84578bc52a90
-Step 5/22 : ENV RUNDECK_SERVER_FORWARDED=true
+ ---> 4f4703830975
+Step 5/21 : ENV RUNDECK_SERVER_FORWARDED=true
  ---> Using cache
- ---> 52a906145602
-Step 6/22 : RUN useradd --create-home myuser
+ ---> 109c2f0beb80
+Step 6/21 : RUN useradd --create-home myuser
  ---> Using cache
- ---> 7b1b23096d0a
-Step 7/22 : ENV HOME=/home/myuser/rundeck
+ ---> dff2d8066980
+Step 7/21 : ENV HOME=/home/myuser/rundeck
  ---> Using cache
- ---> ed985fca5818
-Step 8/22 : ENV RDECK_BASE=$HOME
+ ---> dd7183b8e5c8
+Step 8/21 : ENV RDECK_BASE=$HOME
  ---> Using cache
- ---> 6beed4029239
-Step 9/22 : RUN mkdir $HOME
+ ---> 17a169308327
+Step 9/21 : RUN mkdir $HOME
  ---> Using cache
- ---> 62ca9af16b6d
-Step 10/22 : WORKDIR $HOME
+ ---> 154f784c1869
+Step 10/21 : WORKDIR $HOME
  ---> Using cache
- ---> 85f54d7701ef
-Step 11/22 : COPY requirements.txt .
+ ---> ffd42a4ef788
+Step 11/21 : COPY requirements.txt .
  ---> Using cache
- ---> 95529f8641e2
-Step 12/22 : RUN apt-get update && apt-get -y install python3-pip python3-venv git && apt-get autoclean
+ ---> 367509eece3e
+Step 12/21 : RUN apt-get update && apt-get -y install python3-pip python3-venv git && apt-get autoclean
  ---> Using cache
- ---> 04dc9a5fc8e0
-Step 13/22 : RUN chown -R myuser:myuser /home/myuser
+ ---> e7dca9cce089
+Step 13/21 : RUN chown -R myuser:myuser /home/myuser
  ---> Using cache
- ---> 5465701b5164
-Step 14/22 : USER myuser
+ ---> 5f8fa4d2ee58
+Step 14/21 : USER myuser
  ---> Using cache
- ---> 55a4b6aac1d1
-Step 15/22 : RUN python3 -m venv /home/myuser/venv
+ ---> d972e61ba9a4
+Step 15/21 : RUN python3 -m venv /home/myuser/venv
  ---> Using cache
- ---> 70a581ef0c95
-Step 16/22 : ENV PATH="/home/myuser/venv/bin:$PATH"
+ ---> 00daca0d8552
+Step 16/21 : ENV PATH="/home/myuser/venv/bin:$PATH"
  ---> Using cache
- ---> da8fe2146314
-Step 17/22 : RUN pip install --upgrade pip && pip install -r requirements.txt
+ ---> 4f7f9f3ee1dc
+Step 17/21 : RUN pip install --upgrade pip && pip install -r requirements.txt
  ---> Using cache
- ---> 07dbb35ac127
-Step 18/22 : COPY $RDECK_IMAGE rundeck.war
+ ---> f70f322543a2
+Step 18/21 : COPY $RDECK_IMAGE rundeck.war
  ---> Using cache
- ---> f035ad4102d4
-Step 19/22 : RUN java -jar rundeck.war --installonly
+ ---> e6c868a1cc7e
+Step 19/21 : RUN java -jar rundeck.war --installonly
  ---> Using cache
- ---> b3d18fc1e5d3
-Step 20/22 : COPY config server/config
+ ---> 62b46a5698c2
+Step 20/21 : EXPOSE 4440
  ---> Using cache
- ---> 72a735f67428
-Step 21/22 : EXPOSE 4440
+ ---> a1345b889ac9
+Step 21/21 : ENTRYPOINT ["java", "-jar", "rundeck.war"]
  ---> Using cache
- ---> 1e986b9e93dd
-Step 22/22 : ENTRYPOINT ["java", "-jar", "rundeck.war"]
- ---> Using cache
- ---> 5bdd965efc7d
-Successfully built 5bdd965efc7d
+ ---> 2402639ac5b6
+Successfully built 2402639ac5b6
 Successfully tagged my-ansible-rundeck:latest
 
 peter@Peter-Desktop-2020:/tmp/my-ansible-rundeck$ docker images
