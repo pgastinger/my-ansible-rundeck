@@ -1,7 +1,7 @@
 FROM openjdk:11.0.13-bullseye
 
 # downloads https://www.rundeck.com/community-downloads
-ARG RDECK_IMAGE=rundeck-3.4.6-20211110.war
+ARG RDECK_IMAGE=rundeck.war
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
