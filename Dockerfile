@@ -29,10 +29,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # copy war
 COPY $RDECK_IMAGE rundeck.war
 RUN java -jar rundeck.war --installonly
-COPY config server/config
 
 EXPOSE 4440
 
 # entrypoint
 ENTRYPOINT ["java", "-jar", "rundeck.war"]
-
