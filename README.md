@@ -132,7 +132,7 @@ rundeck_1  | Grails application running at http://0.0.0.0:4440 in environment: p
 ```
 
 ## Login 
-Username admin, password topsecretadminpw
+Username **admin**, password **topsecretadminpw**
 ```
 http://127.0.0.1/
 ```
